@@ -1,0 +1,107 @@
+.movies__search-content {
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.movies__search-bar {
+    display: flex;
+    margin: 0 auto;
+    border-radius: 9px;
+    padding: 0;
+    height: 72px;
+    margin-top: 70px;
+    border: 1px solid #E8E8E8;
+    justify-content: space-between;
+  }
+
+  .movies__search-loop-img {
+    width: 34px;
+    height: 34px;
+    margin: auto 0;
+    padding: 19px 0 19px 19px;
+  }
+
+  .movies__search-input {
+    background-color: white;
+    border: none;
+    color: #8B8B8B;
+    font-size: 18px;
+    font-weight: 400;
+    width: 94px;
+    height: 34px;
+    margin: auto auto auto 10px;
+  }
+  
+  .movies__search-input-bar {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    padding: 0 auto;
+    
+  }
+  .movies__search-input:focus {
+    border: none;
+    outline: none;
+    color: #ffff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px white;
+  }
+  
+  .movies__search-btn {
+    width: 34px;
+    height: 34px;
+    background: url(../../images/find-arrow.svg);
+    border: none;
+    background-position: right;
+    margin: auto;
+    /*border-radius: 48px;
+    padding: 0;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 1s ease all;
+    background-color: #3456F3;
+    color: white;*/
+  }
+  .movies__search-btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  .movies__search-btn-box {
+    display: flex;
+    margin: auto 0 auto;
+  }
+  
+  .movies__dividing-line {
+    height: 40px;
+    margin: 16px 30px;
+    display: flex;
+    /*justify-content: right;*/
+    align-self: flex-end;
+  }
+  @media (max-width: 875px) {
+    .movies__search-bar {
+      margin-top: 80px;
+    }
+  }
+  @media (max-width: 700px) {
+
+    .movies__search-content {
+      flex-direction: column;
+    }
+
+    .movies__search-input {
+      width: 100%;
+    }
+    .movies__search-btn {
+      margin-right: 19px;
+    }
+    .movies__search-btn-box {
+      margin: auto 19px auto;
+
+    }
+    .movies__dividing-line {
+      display: none;
+    }
+  }
+  

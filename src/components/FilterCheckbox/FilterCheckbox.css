@@ -1,0 +1,72 @@
+.movies__search-btn-label {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    display: flex;
+    padding-top: 30px;
+    height: 40px;
+  }
+  .movies__checkbox-short {
+    display: none;
+  }
+
+  .movies__checkbox-full {
+    margin-right: 30px;
+    align-self: flex-end;
+    justify-content: flex-end;
+  }
+
+  .movies__search-btn-invisible {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .movies__search-btn-invisible:checked + .movies__search-btn-visible {
+    background: url('../../images/tumbleroff.svg');
+    margin: 0 14px 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .movies__search-btn-invisible + .movies__search-btn-visible {
+    background: url('../../images/tumbler.svg');
+    margin: 0 14px 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .movies__search-btn-visible {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 20px;
+    transition: all 0.7s ease;
+  }
+  .movies__search-title {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  @media (max-width: 700px) {
+    .movies__search-btn-label {
+        padding: 0;
+        border: none;
+        margin: 0;
+      }
+
+      .movies__checkbox-short {
+        display: flex;
+        margin: 45px auto 0;
+        justify-content: center;
+      }
+  
+      .movies__checkbox-full {
+        display: none;
+      }
+  }

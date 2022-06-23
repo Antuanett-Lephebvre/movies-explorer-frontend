@@ -1,0 +1,143 @@
+.student {
+  background: #FFFFFF;
+  padding: 110px 70px 0;
+}
+.student__title {
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  margin: 0 0 23px;
+}
+.student__content {
+  border-top: 1px solid black;
+  padding-top: 66px;
+  margin: 0 0 100px;
+}
+.student__info {
+  display: flex;
+  justify-content: space-between;
+}
+.student__img {
+  width: 393px;
+  height: 416px;
+  object-fit: cover;
+}
+.student__text-box {
+  width: 600px;
+  margin: 0 270px 0 0;
+}
+.student__subtitle {
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0;
+}
+.student__semi-title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 18px 0 26px;
+}
+.student__text {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 0 99px;
+}
+.student__link-bar {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.student__link-bar-point {
+  margin: 0;
+  transition: 1s ease all;
+}
+.student__link-bar-point:last-child {
+  margin-left: 20px;
+}
+.student__link {
+  color: black;
+  text-decoration: none;
+}
+.student__link-bar-point:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.student__link-text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+@media (max-width: 875px) {
+  .student {
+    padding: 90px 50px 0;
+  }
+  .student__content {
+    margin-bottom: 90px;
+  }
+  .student__text-box {
+    width: 364px;
+    margin-right: 49px;
+  }
+  .student__img {
+    width: 227px;
+    height: 243px;
+  }
+  .student__subtitle {
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .student__semi-title {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 16px 0 20px;
+  }
+  .student__text {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 87px;
+  }
+}
+@media (max-width: 700px) {
+  .student {
+    padding: 70px 14px 0;
+  }
+  .student__content {
+    margin-bottom: 70px;
+  }
+  .student__text-box {
+    width: 100%;
+    margin-right: 0;
+    margin-top: 40px;
+  }
+  .student__img {
+    width: 292px;
+    height: 308px;
+    margin: auto;
+  }
+  .student__subtitle {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .student__semi-title {
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 20px;
+  }
+  .student__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 40px;
+  }
+  .student__info {
+    flex-direction: column-reverse;
+  }
+  .student__link-bar-point {
+    margin: 0;
+  }
+  .student__link-bar-point:last-child {
+    margin-left: 26px;
+  }
+}

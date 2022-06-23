@@ -1,0 +1,138 @@
+.profile {
+  width: 100%;
+  padding: 74px 0 70px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile__form {
+  width: 410px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.profile__title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  padding: 0px;
+  margin: 0 0 123px 0;
+}
+.profile__input-bar {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.profile__input-bar-point {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  color:black;
+
+  justify-content: space-between;
+}
+.profile__input-bar-point:first-child {
+  border-bottom: 1px solid #424242;
+  padding-bottom: 16px;
+}
+.profile__input-bar-point:last-child {
+  padding-top: 17px;
+}
+
+.profile__btn-box {
+  margin: 220px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  width: 410px;
+  
+}
+.profile__hint {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  margin: 0;
+  padding: 0;
+}
+
+.profile__button {
+  width: 100%;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color:black;
+  transition: 1s ease all;
+}
+
+.profile__button_type_exit {
+  color: #ee3465;
+  text-decoration: none;
+}
+
+.profile__button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.profile__input {
+  width: 122px;
+  text-align: right;
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  background-color: transparent;
+  border: none;
+  color:black;
+  overflow: hidden;
+}
+.profile__input:focus {
+  border: none;
+  outline: none;
+}
+.profile__button_type_exit-text {
+  margin: 0;
+}
+@media (max-width: 875px) {
+  .profile {
+    padding: 236px 0 269px 0;
+  }
+  .profile__title {
+    margin-bottom: 96px;
+  }
+  .profile__btn-box {
+    margin-top: 210px;
+  }
+}
+
+@media (max-width: 700px) {
+  .profile {
+    padding: 70px 0 40px;
+    width: calc(100% - 60px);
+    margin: 0 auto;
+  }
+  .profile__title {
+    margin-bottom: 80px;
+  }
+  .profile__btn-box {
+    margin-top: 379px;
+    width: 100%;
+  }
+  .profile__form {
+    width: 100%;
+  }
+  .profile__input {
+    width: 120px;
+  }
+}
