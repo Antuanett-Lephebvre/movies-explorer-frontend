@@ -11,6 +11,7 @@ const Movies = () => {
       <Header homePageBtnCondition={'disable'} />
       <Navigation activeLinkMovies={'menu__active-link'} />
       <MoviesCardList cards={cards} />
+      <button className={`movies__button`}>Ещё</button>
       <Footer />
     </>
   );
