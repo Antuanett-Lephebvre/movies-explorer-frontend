@@ -13,7 +13,6 @@ const SavedMovies = () => {
       <MoviesCardList
         savedMoviesMargin={'movies-saved-movies-margin'}
         cards={savedCards}
-        btnCondishion={'saved'}
       />
       <Footer />
     </>
