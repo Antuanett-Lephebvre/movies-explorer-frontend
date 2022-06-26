@@ -1,0 +1,15 @@
+.movies__button {
+    width: 100%;
+    margin: 50px auto 80px;
+    padding: 0;
+    border-radius: 6px;
+    color: black;
+    background: #F4F4F4;
+    height: 36px;
+    border: none;
+    transition: 0.5s ease all;
+  }
+  .movies__button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
