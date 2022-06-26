@@ -10,7 +10,8 @@
     padding: 0;
     height: 72px;
     margin-top: 70px;
-    border: 1px solid #E8E8E8;
+    border: none;
+    background: #F9F9F9;
     justify-content: space-between;
   }
 
@@ -22,12 +23,12 @@
   }
 
   .movies__search-input {
-    background-color: white;
+    background-color: #F9F9F9;
     border: none;
     color: #8B8B8B;
     font-size: 18px;
     font-weight: 400;
-    width: 94px;
+    min-width: 45vw;
     height: 34px;
     margin: auto auto auto 10px;
   }
@@ -42,9 +43,8 @@
   .movies__search-input:focus {
     border: none;
     outline: none;
-    color: #ffff;
+    color: black;
     border-radius: 10px;
-    box-shadow: 1px 1px 6px white;
   }
   
   .movies__search-btn {
@@ -82,6 +82,9 @@
   @media (max-width: 875px) {
     .movies__search-bar {
       margin-top: 80px;
+    }
+    .movies__search-input {
+      min-width: 40vw;
     }
   }
   @media (max-width: 700px) {
