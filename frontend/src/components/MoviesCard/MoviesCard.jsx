@@ -14,9 +14,7 @@ const MoviesCard = ({ card }) => {
         </div>
         </div>
       <img className='card__img' alt='фильм' src={card.link} />
-      
     </div>
   );
 };
 export default MoviesCard;
-
