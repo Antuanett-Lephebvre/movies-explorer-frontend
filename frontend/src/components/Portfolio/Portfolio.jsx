@@ -1,5 +1,6 @@
 import React from "react";
 import portfolioArrow from "../../images/arrow.svg";
+import iconArrow from "../../images/arrow-icon.svg"
 const Portfolio = () => {
   return (
     <section className="portfolio">
@@ -18,6 +19,11 @@ const Portfolio = () => {
               alt="переход"
               src={`${portfolioArrow}`}
             />
+            <img
+            className="arro-icon"
+            alt="иконка со стрелкой перехода"
+            src={`${iconArrow}`}
+            />
           </a>
         </li>
         <li className="portfolio__link-bar-point">
@@ -33,6 +39,11 @@ const Portfolio = () => {
               alt="переход"
               src={`${portfolioArrow}`}
             />
+            <img
+            className="arro-icon"
+            alt="иконка со стрелкой перехода"
+            src={`${iconArrow}`}
+            />
           </a>
         </li>
         <li className="portfolio__link-bar-point">
@@ -47,6 +58,11 @@ const Portfolio = () => {
               className="portfolio__link-img"
               alt="переход"
               src={`${portfolioArrow}`}
+            />
+            <img
+            className="arro-icon"
+            alt="иконка со стрелкой перехода"
+            src={`${iconArrow}`}
             />
           </a>
         </li>
