@@ -1,58 +1,60 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import './Navigation.css';
+import { Link, NavLink } from 'react-router-dom';
+import Hamburger from '../Hamburger/Hamburger.jsx';
 
-const Navigation = ({
-  activeLinkMovies,
-  activeLinkSavedMovies,
-  activeLinkProfile,
-}) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const handleMenuOpenBtnClick = () => {
-    setIsMenuOpen(true);
-  };
-  const handleMenuCloseBtnClick = () => {
-    setIsMenuOpen(false);
-  };
+export default function Navigation({ loggedIn, isBurgerOpened, onClickBurger }) {
+  const activeLink = `navigation__link_active_${isBurgerOpened ? 'mobile' : 'desktop'}`;
+
+  function handleClickOverlay(e) {
+    e.stopPropagation();
+  }
+
   return (
     <>
-      <button
-        type='button'
-        onClick={handleMenuOpenBtnClick}
-        className='menu__btn-open'
-      ></button>
-      <nav className={`menu ${isMenuOpen ? '' : 'disable'}`}>
-        <div className='menu__background'></div>
-        <button
-          type='button'
-          onClick={handleMenuCloseBtnClick}
-          className='menu__exit-btn'
-        ></button>
-        <ul className={`menu__link-bar ${isMenuOpen ? '' : 'disable'}`}>
-          <li className='menu__piont menu__piont-main'>
-            <NavLink className='menu__link' to='/'>
-              Главная
-            </NavLink>
-          </li>
-          <li className={`menu__piont ${activeLinkMovies}`}>
-            <NavLink className='menu__link' to='/movies'>
-              Фильмы
-            </NavLink>
-          </li>
-          <li className={`menu__piont ${activeLinkSavedMovies}`}>
-            <NavLink className='menu__link' to='/saved-movies'>
-              Сохранённые фильмы
-            </NavLink>
-          </li>
-          <li
-            className={`menu__piont menu__piont-profile ${activeLinkProfile}`}
-          >
-            <NavLink className='menu__link menu__lin-profile' to='/profile'>
-              Аккаунт
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+      {!loggedIn ? (
+        <nav className="navigation">
+          <ul className="navigation__list">
+            <li>
+              <Link to='/signup' className='navigation__link navigation__link_landing'>
+                Регистрация
+              </Link>
+            </li>
+            <li>
+              <Link to='/signin' className='navigation__link navigation__link_landing navigation__link_signin'>
+                Войти
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      ) : (
+        <nav className={`navigation navigation_state_${isBurgerOpened ? 'opened' : 'closed'}`} onClick={isBurgerOpened ? onClickBurger : undefined}>
+          <Hamburger isBurgerOpened={isBurgerOpened} onClickBurger={onClickBurger} />
+          <ul className={`navigation__list navigation__list_logged navigation__list_state_${isBurgerOpened ? 'opened' : 'closed'}`} onClick={handleClickOverlay}>
+            {isBurgerOpened && (
+              <li className="navigation__item">
+                <NavLink exact to='/' className='navigation__link' activeClassName={activeLink}>
+                  Главная
+                </NavLink>
+              </li>
+            )}
+            <li className="navigation__item">
+              <NavLink to='/movies' className='navigation__link' activeClassName={activeLink}>
+                Фильмы
+              </NavLink>
+            </li>
+            <li className="navigation__item">
+              <NavLink to='/saved-movies' className='navigation__link' activeClassName={activeLink}>
+                Сохранённые фильмы
+              </NavLink>
+            </li>
+            <li className="navigation__item">
+              <NavLink to='/profile' className='navigation__link navigation__link_type_account' activeClassName={activeLink}>
+                Аккаунт
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      )}
     </>
   );
-};
-export default Navigation;
+}

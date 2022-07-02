@@ -1,8 +1,7 @@
-import React from 'react';
+import './NavTab.css';
 
-const NavTab = () => {
-    return (
-    <>
+export default function NavTab() {
+  return (
     <div className='promo-link-bar'>
     <a className='promo-link' href='#project'>
         О проекте
@@ -14,8 +13,5 @@ const NavTab = () => {
         Студент
     </a>
     </div>
-    </>
-    )
+  );
 }
-
-export default NavTab;

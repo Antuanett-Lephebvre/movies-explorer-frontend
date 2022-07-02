@@ -1,46 +1,70 @@
-import React from 'react';
-import Header from '../Header/Header';
-const Profile = () => {
+import './Profile.css';
+import { useEffect, useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext.jsx';
+import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
+
+export default function Profile({ handleSignOut, handleProfile }) {
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+  const currentUser = useContext(CurrentUserContext);
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleProfile(values);
+  }
+
+  useEffect(() => {
+    if (currentUser) {
+      resetForm(currentUser, {}, true);
+    }
+  }, [currentUser, resetForm]);
+
+  const requirementValidity = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
+
   return (
-    <>
-      <Header homePageBtnCondition={'disable'} />
-      <section className='profile'>
-        <h1 className='profile__title'>Привет, Виталий</h1>
-        <form className='profile__form'>
-          <ul className='profile__input-bar'>
-            <li className='profile__input-bar-point'>
-              <p className='profile__hint'>Имя</p>
-              <input
-                className='profile__input'
-                placeholder='Ваше имя'
-                defaultValue={'Виталий'}
-              ></input>
-            </li>
-            <li className='profile__input-bar-point'>
-              <p className='profile__hint'>E-mail</p>
-              <input
-                className='profile__input'
-                defaultValue={'pochta@yandex.ru'}
-              ></input>
-            </li>
-          </ul>
-          <div className='profile__btn-box'>
-            <button type='submit' className='profile__button'>
-              Редактировать
-            </button>
-            <a
-              type='button'
-              className='profile__button profile__button_type_exit'
-              href='/'
-            >
-              <p className='profile__button_type_exit-text'>
-                Выйти из аккаунта
-              </p>
-            </a>
-          </div>
-        </form>
-      </section>
-    </>
+    <main className="profile">
+      <form className="profile__form" name="profile" noValidate onSubmit={handleSubmit}>
+        <h1 className="profile__title">{`Привет, ${currentUser.name || ''}!`}</h1>
+        <div className="profile__labels-container">
+          <label className="profile__label">
+            <span className="profile__label-text">Имя</span>
+            <input
+              name="name"
+              className={`profile__input ${errors.name && 'profile__input_error'}`}
+              onChange={handleChange}
+              value={values.name || ''}
+              type="text"
+              required
+              minLength="2"
+              maxLength="30"
+              pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
+            />
+            <span className="profile__error-name">{errors.name || ''}</span>
+          </label>
+          <label className="profile__label">
+            <span className="profile__label-text">E-mail</span>
+            <input
+              name="email"
+              className={`profile__input ${errors.email && 'profile__input_error'}`}
+              onChange={handleChange}
+              value={values.email || ''}
+              type="email"
+              required
+            />
+            <span className="profile__error">{errors.email || ''}</span>
+          </label>
+        </div>
+        <div className="profile__button-container">
+          <button
+            type="submit"
+            className={`profile__button-edit ${requirementValidity ? 'profile__button-edit_disabled' : ''}`}
+            disabled={requirementValidity ? true : false}
+          >
+            Редактировать
+          </button>
+          <button type="submit" className="profile__button-exit" onClick={handleSignOut}>
+            Выйти из аккаунта
+          </button>
+        </div>
+      </form>
+    </main>
   );
-};
-export default Profile;
+}

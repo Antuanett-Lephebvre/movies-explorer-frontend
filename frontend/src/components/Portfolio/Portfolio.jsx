@@ -1,73 +1,43 @@
-import React from "react";
-import portfolioArrow from "../../images/arrow.svg";
-import iconArrow from "../../images/arrow-icon.svg"
-const Portfolio = () => {
+import './Portfolio.css';
+
+export default function Portfolio() {
   return (
     <section className="portfolio">
-      <h4 className="portfolio__title">Портфолио</h4>
-      <ul className="portfolio__link-bar">
-        <li className="portfolio__link-bar-point">
-          <a
-            className="portfolio__link"
-            href="https://github.com/Antuanett-Lephebvre/how-to-learn"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <p className="portfolio__link-text">Статичный сайт</p>
-            <img
-              className="portfolio__link-img"
-              alt="переход"
-              src={`${portfolioArrow}`}
-            />
-            <img
-            className="arro-icon"
-            alt="иконка со стрелкой перехода"
-            src={`${iconArrow}`}
-            />
-          </a>
-        </li>
-        <li className="portfolio__link-bar-point">
-          <a
-            className="portfolio__link"
-            href="https://github.com/Antuanett-Lephebvre/russian-travel"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <p className="portfolio__link-text">Адаптивный сайт</p>
-            <img
-              className="portfolio__link-img"
-              alt="переход"
-              src={`${portfolioArrow}`}
-            />
-            <img
-            className="arro-icon"
-            alt="иконка со стрелкой перехода"
-            src={`${iconArrow}`}
-            />
-          </a>
-        </li>
-        <li className="portfolio__link-bar-point">
-          <a
-            className="portfolio__link"
-            href="https://github.com/Antuanett-Lephebvre/react-mesto-api-full"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <p className="portfolio__link-text">Одностраничное приложение</p>
-            <img
-              className="portfolio__link-img"
-              alt="переход"
-              src={`${portfolioArrow}`}
-            />
-            <img
-            className="arro-icon"
-            alt="иконка со стрелкой перехода"
-            src={`${iconArrow}`}
-            />
-          </a>
-        </li>
-      </ul>
+      <div className="portfolio__container">
+        <h2 className="portfolio__title">Портфолио</h2>
+        <ul className="portfolio__projects-list">
+          <li className="portfolio__projects-item">
+            <a
+              href="https://github.com/Antuanett-Lephebvre/how-to-learn"
+              target="_blank"
+              rel="noreferrer"
+              className="portfolio__link"
+            >
+              Статичный сайт
+            </a>
+          </li>
+          <li className="portfolio__projects-item">
+            <a
+              href="https://github.com/Antuanett-Lephebvre/russian-travel"
+              target="_blank"
+              rel="noreferrer"
+              className="portfolio__link"
+            >
+              Адаптивный сайт
+            </a>
+          </li>
+          <li className="portfolio__projects-item">
+            <a
+              href="https://github.com/Antuanett-Lephebvre/react-mesto-api-full"
+              target="_blank"
+              rel="noreferrer"
+              className="portfolio__link"
+            >
+              Одностраничное приложение
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
   );
-};
-export default Portfolio;
+}

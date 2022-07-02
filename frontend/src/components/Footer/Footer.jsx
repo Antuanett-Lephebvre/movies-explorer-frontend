@@ -1,46 +1,48 @@
-import React from 'react';
-const Footer = () => {
+import './Footer.css';
+
+export default function Footer() {
   return (
-    <footer className='footer'>
-      <h2 className='footer__title'>
-        Учебный проект Яндекс.Практикум х BeatFilm.
-      </h2>
-      <div className='footer__content'>
-        <p className='footer__copyright'>&copy; 2022</p>
-        <ul className='footer__link-bar'>
-          <li className='footer__link-bar-piont'>
-            <a
-              className='footer__link'
-              href='https://practicum.yandex.ru'
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              <p className='footer__link-text'>Яндекс.Практикум</p>
-            </a>
-          </li>
-          <li className='footer__link-bar-piont'>
-            <a
-              className='footer__link'
-              href='https://github.com/yandex-praktikum'
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              <p className='footer__link-text'>Github</p>
-            </a>
-          </li>
-          <li className='footer__link-bar-piont'>
-            <a
-              className='footer__link'
-              href='https://t.me/practicumtech'
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              <p className='footer__link-text'>Telegram</p>
-            </a>
-          </li>
-        </ul>
+    <footer className="footer">
+      <div className="footer__container">
+        <h2 className="footer__title">
+          Учебный проект Яндекс.Практикум х BeatFilm.
+        </h2>
+        <div className="footer__navigation">
+          <p className="footer__copyright">&copy;{new Date().getFullYear()}</p>
+          <ul className="footer__links-list">
+            <li>
+              <a
+                href="https://practicum.yandex.ru/"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__link"
+              >
+                Яндекс.Практикум
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/yandex-praktikum"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__link"
+              >
+                Github
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://t.me/practicumtech"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__link"
+              >
+                Telegram
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </footer>
   );
-};
-export default Footer;
+}

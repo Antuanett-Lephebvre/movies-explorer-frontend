@@ -1,68 +1,75 @@
-import React from 'react';
-import formValidator from '../../utils/Validator';
-const Login = () => {
-  const { values, isValid, handleChange, errors } = formValidator({
-    email: '',
-    password: '',
-  });
+import './Login.css';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../images/logo.svg';
+import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
+
+export default function Login({ handleLogin }) {
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleLogin(values);
+  }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
-    <section className='login'>
-      <div className='login__content'>
-        <a className='login__logo' href='/'></a>
-        <h1 className='login__title'>Рады видеть!</h1>
-        <form className='login__form'>
-          <ul className='login__form-input-bar'>
-            <li className='login__form-input-bar-point'>
-              <p className='login__hint'>E-mail</p>
-              <input
-                name='email'
-                type='email'
-                value={values.email}
-                className={
-                  errors.email
-                    ? 'login__input-error login__input'
-                    : ' login__input'
-                }
-                onChange={handleChange}
-                required
-              ></input>
-            </li>
-            <li className='login__form-input-bar-point'>
-              <p className='login__hint'>Пароль</p>
-              <input
-                value={values.password}
-                className={
-                  errors.password
-                    ? 'login__input-error login__input'
-                    : ' login__input'
-                }
-                onChange={handleChange}
-                name='password'
-                type='password'
-                minLength='8'
-                maxLength='35'
-                required
-              ></input>
-              <span className={!isValid ? 'login__error' : 'disable'}>
-                {errors?.email}
-                <div className='login__error-margin'></div>
-                {errors?.password}
-              </span>
-            </li>
-          </ul>
-          <button type='submit' className='login__btn'>
-            Войти
-          </button>
-          <div className='login__text-box'>
-            <p className='login__text'>Ещё не зарегистрированы?</p>
-            <a className='login__link' href='/signup'>
-              Регистрация
-            </a>
-          </div>
-        </form>
-      </div>
-    </section>
+    <main className="login">
+      <form
+        className="login__form"
+        name="login"
+        noValidate
+        onSubmit={handleSubmit}
+      >
+        <Link to='/' className='login__link'>
+          <img src={logo} alt="Логотип" className="login__logo" />
+        </Link>
+        <h1 className="login__title">Рады видеть!</h1>
+        <div className="login__labels-container">
+          <label className="login__label">
+            <span className="login__label-text">E-mail</span>
+            <input
+              name="email"
+              className={`login__input ${errors.email && 'login__input_error'}`}
+              onChange={handleChange}
+              value={values.email || ''}
+              type="email"
+              required
+            />
+            <span className="login__error">{errors.email || ''}</span>
+          </label>
+          <label className="login__label">
+            <span className="login__label-text">Пароль</span>
+            <input
+              name="password"
+              className={`login__input ${
+                errors.password && 'login__input_error'
+              }`}
+              onChange={handleChange}
+              value={values.password || ''}
+              type="password"
+              required
+            />
+            <span className="login__error">{errors.password || ''}</span>
+          </label>
+        </div>
+        <button
+          type="submit"
+          className={`login__button ${!isValid && 'login__button_disabled'}`}
+          disabled={!isValid}
+        >
+          Войти
+        </button>
+        <span className="login__support">
+          Ещё не зарегистрированы?&nbsp;
+          <Link to='/signup' className="login__link">
+            Регистрация
+          </Link>
+        </span>
+      </form>
+    </main>
   );
-};
-export default Login;
+}

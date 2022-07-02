@@ -1,20 +1,60 @@
-import React from 'react';
+import './MoviesCard.css';
+import { useLocation } from 'react-router-dom';
+import { transformDuration } from '../../utils/utils.js';
 
-const MoviesCard = ({ card }) => {
+export default function MoviesCard({ movie, saved, onLikeClick, onDeleteClick }) {
+  const location = useLocation();
+
+  function handleLikeClick() {
+    onLikeClick(movie);
+  }
+
+  function handleDeleteClick() {
+    onDeleteClick(movie);
+  }
+
   return (
-    
-    <div className={`card ${card.markerClass}`}>
-      <div className='card__container'>
-        <div className='card__content'>
-          <h2 className='card__title'>{card.title}</h2>
-          <span className='card__timeline'>{card.time}</span>
+    <li className="movies-card">
+      <article className="movies-card__item">
+        <div className="movies-card__description">
+          <h2 className="movies-card__title">{movie.nameRU}</h2>
+          <span className="movies-card__duration">
+          {transformDuration(movie.duration)}
+        </span>
         </div>
-        <div className='card__title-heart-box'>
-          <button className={`card__movies-button ${card.btn}`}></button>
-        </div>
-        </div>
-      <img className='card__img' alt='фильм' src={card.link} />
-    </div>
+          {location.pathname === '/movies' && (
+            <button
+              type="button"
+              className={`movies-card__button movies-card__button_type_${
+                saved ? 'saved' : 'save'
+              }`}
+              onClick={saved ? handleDeleteClick : handleLikeClick}
+              aria-label={`${
+                saved ? 'Удалить фильм из сохранённых' : 'Сохранить фильм'
+              }`}
+              title={`${
+                saved ? 'Удалить фильм из сохранённых' : 'Сохранить фильм'
+              }`}
+            ></button>
+          )}
+          {location.pathname === '/saved-movies' && (
+            <button
+              type="button"
+              className="movies-card__button movies-card__button_type_unsave"
+              onClick={handleDeleteClick}
+              aria-label="Удалить фильм из сохранённых"
+              title="Удалить фильм из сохранённых"
+            ></button>
+          )}
+      </article>
+      <a target="_blank" rel="noreferrer" href={movie.trailerLink}>
+          <img
+            src={movie.image}
+            alt={movie.nameRU}
+            title={`Описание: ${movie.description} \n\nСнято: ${movie.country} ${movie.year}г.`}
+            className="movies-card__poster"
+          />
+        </a>
+    </li>
   );
-};
-export default MoviesCard;
+}

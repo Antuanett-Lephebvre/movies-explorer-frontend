@@ -1,18 +1,20 @@
-.body {
-  background-color: #ffffff;
-  margin: 0;
+.app {
+  background-color: white;
   min-height: 100vh;
-  color: black;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-}
-.page {
+  min-width: 320px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   position: relative;
-}
-.disable {
-  display: none;
-}
-@media (max-width: 875px) {
-  .disable {
-    display: none;
-  }
+  font-family: 'Inter', Arial, sans-serif;
+  color: black;
+  overflow: hidden;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
 }

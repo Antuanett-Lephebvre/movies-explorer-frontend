@@ -1,14 +1,17 @@
-import React from 'react';
+import './Promo.css';
 import NavTab from '../NavTab/NavTab'
 
-const promo = () => {
+export default function Promo() {
   return (
-    <section className='promo'>
-      <h1 className='promo__title'>
-        Учебный проект студента факультета Веб-разработки.
-      </h1>
-      <NavTab />
+    <section className="promo">
+      <div className="promo__container">
+        <div className="promo__about-project">
+          <h1 className="promo__title">
+            Учебный проект студента факультета Веб&#8209;разработки.
+          </h1>
+          <NavTab />
+        </div>
+      </div>
     </section>
   );
-};
-export default promo;
+}

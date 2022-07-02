@@ -1,82 +1,84 @@
-import React from 'react';
-import formValidator from '../../utils/Validator';
-const Signin = () => {
-  const { values, isValid, handleChange, errors } = formValidator({
-    email: '',
-    password: '',
-    name: '',
-  });
-  return (
-    <section className='signin'>
-      <div className='signin__content'>
-        <a className='signin__logo' href='/'></a>
-        <h1 className='signin__title'>Добро пожаловать!</h1>
-        <form className='signin__form'>
-          <ul className='signin__form-input-bar'>
-            <li className='signin__form-input-bar-point'>
-              <p className='signin__hint'>Имя</p>
-              <input
-                className={
-                  errors.name
-                    ? 'signin__input-error signin__input'
-                    : ' signin__input'
-                }
-                name='name'
-                onChange={handleChange}
-                value={values.name}
-                type='text'
-                required
-              ></input>
-            </li>
-            <li className='signin__form-input-bar-point'>
-              <p className='signin__hint'>E-mail</p>
-              <input
-                className={
-                  errors.email
-                    ? 'signin__input-error signin__input'
-                    : ' signin__input'
-                }
-                name='email'
-                onChange={handleChange}
-                value={values.email}
-                required
-                type='email'
-              ></input>
-            </li>
-            <li className='signin__form-input-bar-point'>
-              <p className='signin__hint'>Пароль</p>
-              <input
-                className={
-                  errors.password
-                    ? 'signin__input-error signin__input'
-                    : ' signin__input'
-                }
-                name='password'
-                onChange={handleChange}
-                value={values.password}
-                required
-                minLength='8'
-                maxLength='35'
-                type='password'
-              ></input>
+import './Register.css';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../images/logo.svg';
+import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
 
-              <span className={!isValid ? 'signin__error ' : 'disable'}>
-                {errors?.name}
-                <div className='signin__error-margin'></div> {errors?.email}
-                <div className='signin__error-margin'></div> {errors?.password}
-              </span>
-            </li>
-          </ul>
-          <button className='signin__btn'>Зарегистрироваться</button>
-          <div className='signin__text-box'>
-            <p className='signin__text'>Уже зарегистрированы?</p>
-            <a className='signin__link' href='/signin'>
-              Войти
-            </a>
-          </div>
-        </form>
-      </div>
-    </section>
-  );
-};
-export default Signin;
+export default function Register({ handleRegister }) {
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleRegister(values);
+  }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
+  return (
+    <main className="register">
+      <form className="register__form" name="register" noValidate onSubmit={handleSubmit}>
+        <Link to="/" className="register__link">
+          <img src={logo} alt="Логотип" className="register__logo" />
+        </Link>
+        <h1 className="register__title">Добро пожаловать!</h1>
+        <div className="register__labels-container">
+          <label className="register__label">
+            <span className="register__label-text">Имя</span>
+            <input
+              name="name"
+              className={`register__input ${errors.name && 'register__input_error'}`}
+              onChange={handleChange}
+              value={values.name || ''}
+              type="text"
+              required
+              minLength="2"
+              maxLength="30"
+              pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
+            />
+            <span className="register__error">{errors.name || ''}</span>
+          </label>
+          <label className="register__label">
+            <span className="register__label-text">E-mail</span>
+            <input
+              name="email"
+              className={`register__input ${errors.email && 'register__input_error'}`}
+              onChange={handleChange}
+              value={values.email || ''}
+              type="email"
+              required
+            />
+            <span className="register__error">{errors.email || ''}</span>
+          </label>
+          <label className="register__label">
+            <span className="register__label-text">Пароль</span>
+            <input
+              name="password"
+              className={`register__input ${errors.password && 'register__input_error'}`}
+              onChange={handleChange}
+              value={values.password || ''}
+              type="password"
+              required
+            />
+            <span className="register__error">{errors.password || ''}</span>
+          </label>
+        </div>
+        <button
+          type="submit"
+          className={`register__button ${!isValid && 'register__button_disabled'}`}
+          disabled={!isValid}
+        >
+          Зарегистрироваться
+        </button>
+        <span className="register__support">
+          Уже зарегистрированы?&nbsp;
+          <Link to="signin" className="register__link">
+            Войти
+          </Link>
+        </span>
+      </form>
+    </main>
+  )
+}

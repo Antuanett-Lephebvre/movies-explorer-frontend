@@ -1,52 +1,50 @@
-import React from 'react';
-import studentImg from '../../images/student.png';
-const AboutMe = () => {
+import './AboutMe.css';
+import avatar from '../../images/student.png';
+
+export default function AboutMe() {
   return (
-    <section className='student' id='student'>
-      <h2 className='student__title'>Студент</h2>
-      <div className='student__content'>
-        <div className='student__info'>
-          <div className='student__text-box'>
-            <h3 className='student__subtitle'>Екатерина</h3>
-            <h4 className='student__semi-title'>
-              Фронтенд-разработчик, 20 лет
-            </h4>
-            <p className='student__text'>
+    <section className="about-me" id='student'>
+      <div className="about-me__container">
+        <h2 className="about-me__title">Студент</h2>
+        <div className="about-me__bio-container">
+          <div className="about-me__bio">
+            <h3 className="about-me__name">Екатерина</h3>
+            <p className="about-me__age">Фронтенд-разработчик, 20 лет</p>
+            <p className="about-me__text">
             Студент по специальности “Автоматизация технологических процессов и производств”, выпускник Яндекс.Практикума по направлению “Веб-разработки”.
 Работаю маркетологом, в прошлом - региональный координатор образовательных программ.
 Люблю театр, рисую, умею делать коктейли:)
             </p>
-            <ul className='student__link-bar'>
-              <li className='student__link-bar-point'>
+            <ul className="about-me__socials">
+              <li>
                 <a
-                  className='student__link'
-                  href='https://t.me/EkaterinaMChe'
-                  rel='noopener noreferrer'
-                  target='_blank'
+                  href="https://t.me/EkaterinaMChe"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="about-me__social-link"
                 >
-                  <p className='student__link-text'>Telegram</p>
+                  Telegram
                 </a>
               </li>
-              <li className='student__link-bar-point'>
+              <li>
                 <a
-                  className='student__link'
-                  href='https://github.com/Antuanett-Lephebvre'
-                  rel='noopener noreferrer'
-                  target='_blank'
+                  href="https://github.com/Antuanett-Lephebvre"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="about-me__social-link"
                 >
-                  <p className='student__link-text'> Github</p>
+                  Github
                 </a>
               </li>
             </ul>
           </div>
           <img
-            className='student__img'
-            alt='Портрет студента'
-            src={`${studentImg}`}
+            className="about-me__avatar"
+            src={avatar}
+            alt="фотография разработчика приложения"
           />
         </div>
       </div>
     </section>
   );
-};
-export default AboutMe;
+}

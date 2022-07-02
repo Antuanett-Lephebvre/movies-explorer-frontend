@@ -1,23 +1,18 @@
-import React from 'react';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import AboutMe from '../AboutMe/AboutMe';
-import Portfolio from '../Portfolio/Portfolio';
-import Tech from '../Tech/Tech';
-import AboutProject from '../AboutProject/AboutProject';
-import Promo from '../Promo/Promo';
-const Main = () => {
+import './Main.css';
+import Promo from '../Promo/Promo.jsx';
+import AboutProject from '../AboutProject/AboutProject.jsx';
+import Techs from '../Techs/Techs.jsx';
+import AboutMe from '../AboutMe/AboutMe.jsx';
+import Portfolio from '../Portfolio/Portfolio.jsx';
+
+export default function Main() {
   return (
-    <>
-      <Header applicationBtnCondition={'disable'} />
+    <main className="main">
       <Promo />
       <AboutProject />
-      <Tech />
+      <Techs />
       <AboutMe />
       <Portfolio />
-      <Footer />
-    </>
+    </main>
   );
-};
-
-export default Main;
+}
