@@ -1,5 +1,5 @@
 //const BASE_URL = 'http://localhost:3000';
-const BASE_URL = 'http://api.kate.diplom.nomoreparties.sbs';
+const BASE_URL = 'https://api.kate.diplom.nomoreparties.sbs';
 const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 const SHORTMOVIES_DURATION = 40;
 const DEVICE_PARAMS = {
