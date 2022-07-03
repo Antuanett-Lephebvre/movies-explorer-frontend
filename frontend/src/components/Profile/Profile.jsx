@@ -5,24 +5,24 @@ import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
 
 export default function Profile({ handleSignOut, handleProfile }) {
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
-  const currentUser = useContext(CurrentUserContext);
+  const nowUser = useContext(CurrentUserContext);
   function handleSubmit(e) {
     e.preventDefault();
     handleProfile(values);
   }
 
   useEffect(() => {
-    if (currentUser) {
-      resetForm(currentUser, {}, true);
+    if (nowUser) {
+      resetForm(nowUser, {}, true);
     }
-  }, [currentUser, resetForm]);
+  }, [nowUser, resetForm]);
 
-  const requirementValidity = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
+  const requirementValidity = (!isValid || (nowUser.name === values.name && nowUser.email === values.email));
 
   return (
     <main className="profile">
       <form className="profile__form" name="profile" noValidate onSubmit={handleSubmit}>
-        <h1 className="profile__title">{`Привет, ${currentUser.name || ''}!`}</h1>
+        <h1 className="profile__title">{`Привет, ${nowUser.name || ''}!`}</h1>
         <div className="profile__labels-container">
           <label className="profile__label">
             <span className="profile__label-text">Имя</span>

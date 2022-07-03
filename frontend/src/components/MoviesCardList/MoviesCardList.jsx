@@ -7,7 +7,7 @@ import { getSavedMovieCard } from '../../utils/utils.js';
 import MoviesCard from '../MoviesCard/MoviesCard.jsx';
 
 
-export default function MoviesCardList({ moviesList, savedMoviesList, onLikeClick, onDeleteClick }) {
+export default function MoviesCardList({ moviesList, savedMoviesList, onLikeCard, onDeleteCard }) {
   const screenWidth = useScreenWidth();
 
   const { desktop, tablet, mobile } = DEVICE_PARAMS;
@@ -55,8 +55,8 @@ export default function MoviesCardList({ moviesList, savedMoviesList, onLikeClic
           <MoviesCard
             key={movie.id || movie._id}
             saved={getSavedMovieCard(savedMoviesList, movie)}
-            onLikeClick={onLikeClick}
-            onDeleteClick={onDeleteClick}
+            onLikeCard={onLikeCard}
+            onDeleteCard={onDeleteCard}
             movie={movie}
           />
         ))}

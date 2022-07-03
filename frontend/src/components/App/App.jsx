@@ -27,19 +27,19 @@ export default function App() {
     successful: true,
     text: '',
   });
-  const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [nowUser, setNowUser] = useState({});
   const [savedMoviesList, setSavedMoviesList] = useState([]);
 
   const headerEndpoints = ['/movies', '/saved-movies', '/profile', '/'];
   const footerEndpoints = ['/movies', '/saved-movies', '/'];
 
   function onClickBurger() {
-    setIsBurgerOpened(!isBurgerOpened);
+    setIsBurgerOpen(!isBurgerOpen);
   }
 
-  useEscapePress(onClickBurger, isBurgerOpened);
+  useEscapePress(onClickBurger, isBurgerOpen);
 
   function closeInfoTooltip() {
     setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
@@ -49,10 +49,10 @@ export default function App() {
     history.goBack();
   }
 
-  function handleRegister({ name, email, password }) {
+  function handleRegistration({ name, email, password }) {
     setIsLoader(true);
     mainApi
-      .createUser(name, email, password)
+      .createProfile(name, email, password)
       .then(data => {
         if (data._id) {
           handleLogin({ email, password });
@@ -95,7 +95,7 @@ export default function App() {
   }
 
   function handleSignOut() {
-    setCurrentUser({});
+    setNowUser({});
     setLoggedIn(false);
     localStorage.clear();
     history.push('/');
@@ -104,9 +104,9 @@ export default function App() {
   function handleProfile({ name, email }) {
     setIsLoader(true);
     mainApi
-      .updateUser(name, email)
+      .updateProfile(name, email)
       .then(newUserData => {
-        setCurrentUser(newUserData);
+        setNowUser(newUserData);
         setIsInfoTooltip({
           isOpen: true,
           successful: true,
@@ -123,7 +123,7 @@ export default function App() {
       .finally(() => setIsLoader(false));
   }
 
-  function handleSaveMovie(movie) {
+  function saveMovie(movie) {
     mainApi
       .addNewMovie(movie)
       .then(newMovie => setSavedMoviesList([newMovie, ...savedMoviesList]))
@@ -136,7 +136,7 @@ export default function App() {
       );
   }
 
-  function handleDeleteMovie(movie) {
+  function deleteMovie(movie) {
     const savedMovie = savedMoviesList.find(
       (item) => item.movieId === movie.id || item.movieId === movie.movieId
     );
@@ -171,7 +171,7 @@ export default function App() {
         .then(data => {
           if (data) {
             setLoggedIn(true);
-            setCurrentUser(data);
+            setNowUser(data);
             history.push(path);
           }
         })
@@ -196,7 +196,7 @@ export default function App() {
       setIsLoader(true);
       mainApi
         .getUserInfo()
-        .then(res => setCurrentUser(res))
+        .then(res => setNowUser(res))
         .catch(err =>
           setIsInfoTooltip({
             isOpen: true,
@@ -209,11 +209,11 @@ export default function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    if (loggedIn && currentUser) {
+    if (loggedIn && nowUser) {
       mainApi
         .getSavedMovies()
         .then(data => {
-          const UserMoviesList = data.filter(m => m.owner === currentUser._id);
+          const UserMoviesList = data.filter(m => m.owner === nowUser._id);
           setSavedMoviesList(UserMoviesList);
         })
         .catch(err =>
@@ -224,19 +224,19 @@ export default function App() {
           })
         );
     }
-  }, [currentUser, loggedIn]);
+  }, [nowUser, loggedIn]);
 
   return (
     <div className="app">
       {!load ? (
         <Preloader isOpen={isLoader} />
       ) : (
-        <CurrentUserContext.Provider value={currentUser}>
+        <CurrentUserContext.Provider value={nowUser}>
           <Route exact path={headerEndpoints}>
             <Header
               loggedIn={loggedIn}
               onClickBurger={onClickBurger}
-              isBurgerOpened={isBurgerOpened}
+              isBurgerOpen={isBurgerOpen}
             />
           </Route>
           <Switch>
@@ -245,7 +245,7 @@ export default function App() {
             </Route>
             <Route exact path='/signup'>
               {!loggedIn ? (
-                <Register handleRegister={handleRegister} />
+                <Register handleRegistration={handleRegistration} />
               ) : (
                 <Redirect to='/' />
               )}
@@ -264,15 +264,15 @@ export default function App() {
               setIsLoader={setIsLoader}
               setIsInfoTooltip={setIsInfoTooltip}
               savedMoviesList={savedMoviesList}
-              onLikeClick={handleSaveMovie}
-              onDeleteClick={handleDeleteMovie}
+              onLikeCard={saveMovie}
+              onDeleteCard={deleteMovie}
             />
             <ProtectedRoute
               path='/saved-movies'
               component={SavedMovies}
               loggedIn={loggedIn}
               savedMoviesList={savedMoviesList}
-              onDeleteClick={handleDeleteMovie}
+              onDeleteCard={deleteMovie}
               setIsInfoTooltip={setIsInfoTooltip}
             />
             <ProtectedRoute

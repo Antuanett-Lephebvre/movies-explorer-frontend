@@ -8,13 +8,13 @@ import SearchForm from '../SearchForm/SearchForm.jsx';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.jsx';
 import CurrentUserContext from '../../contexts/CurrentUserContext.jsx';
 
-export default function SavedMovies({ onDeleteClick, savedMoviesList, setIsInfoTooltip }) {
-  const currentUser = useContext(CurrentUserContext);
+export default function SavedMovies({ onDeleteCard, savedMoviesList, setIsInfoTooltip }) {
+  const nowUser = useContext(CurrentUserContext);
 
   const [shortMovies, setShortMovies] = useState(false);
   const [NotFound, setNotFound] = useState(false);
   const [showedMovies, setShowedMovies] = useState(savedMoviesList);
-  const [filteredMovies, setFilteredMovies] = useState(showedMovies);
+  const [selectionMovies, setSelectionMovies] = useState(showedMovies);
 
   function handleSearchSubmit(inputValue) {
     const moviesList = filterMovies(savedMoviesList, inputValue, shortMovies);
@@ -27,7 +27,7 @@ export default function SavedMovies({ onDeleteClick, savedMoviesList, setIsInfoT
       });
     } else {
       setNotFound(false);
-      setFilteredMovies(moviesList);
+      setSelectionMovies(moviesList);
       setShowedMovies(moviesList);
     }
   }
@@ -35,29 +35,29 @@ export default function SavedMovies({ onDeleteClick, savedMoviesList, setIsInfoT
   function handleShortFilms() {
     if (!shortMovies) {
       setShortMovies(true);
-      localStorage.setItem(`${currentUser.email} - shortSavedMovies`, true);
-      setShowedMovies(filterShortMovies(filteredMovies));
-      filterShortMovies(filteredMovies).length === 0 ? setNotFound(true) : setNotFound(false);
+      localStorage.setItem(`${nowUser.email} - shortSavedMovies`, true);
+      setShowedMovies(filterShortMovies(selectionMovies));
+      filterShortMovies(selectionMovies).length === 0 ? setNotFound(true) : setNotFound(false);
     } else {
       setShortMovies(false);
-      localStorage.setItem(`${currentUser.email} - shortSavedMovies`, false);
-      filteredMovies.length === 0 ? setNotFound(true) : setNotFound(false);
-      setShowedMovies(filteredMovies);
+      localStorage.setItem(`${nowUser.email} - shortSavedMovies`, false);
+      selectionMovies.length === 0 ? setNotFound(true) : setNotFound(false);
+      setShowedMovies(selectionMovies);
     }
   }
 
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser.email} - shortSavedMovies`) === 'true') {
+    if (localStorage.getItem(`${nowUser.email} - shortSavedMovies`) === 'true') {
       setShortMovies(true);
       setShowedMovies(filterShortMovies(savedMoviesList));
     } else {
       setShortMovies(false);
       setShowedMovies(savedMoviesList);
     }
-  }, [savedMoviesList, currentUser]);
+  }, [savedMoviesList, nowUser]);
 
   useEffect(() => {
-    setFilteredMovies(savedMoviesList);
+    setSelectionMovies(savedMoviesList);
     savedMoviesList.length !== 0 ? setNotFound(false) : setNotFound(true);
   }, [savedMoviesList]);
 
@@ -72,7 +72,7 @@ export default function SavedMovies({ onDeleteClick, savedMoviesList, setIsInfoT
         <MoviesCardList
           moviesList={showedMovies}
           savedMoviesList={savedMoviesList}
-          onDeleteClick={onDeleteClick}
+          onDeleteCard={onDeleteCard}
         />
       )}
     </main>

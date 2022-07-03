@@ -2,15 +2,15 @@ import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import { transformDuration } from '../../utils/utils.js';
 
-export default function MoviesCard({ movie, saved, onLikeClick, onDeleteClick }) {
+export default function MoviesCard({ movie, saved, onLikeCard, onDeleteCard }) {
   const location = useLocation();
 
-  function handleLikeClick() {
-    onLikeClick(movie);
+  function handleLikeCard() {
+    onLikeCard(movie);
   }
 
-  function handleDeleteClick() {
-    onDeleteClick(movie);
+  function handleDeleteCard() {
+    onDeleteCard(movie);
   }
 
   return (
@@ -28,7 +28,7 @@ export default function MoviesCard({ movie, saved, onLikeClick, onDeleteClick })
               className={`movies-card__button movies-card__button_type_${
                 saved ? 'saved' : 'save'
               }`}
-              onClick={saved ? handleDeleteClick : handleLikeClick}
+              onClick={saved ? handleDeleteCard : handleLikeCard}
               aria-label={`${
                 saved ? 'Удалить фильм из сохранённых' : 'Сохранить фильм'
               }`}
@@ -41,7 +41,7 @@ export default function MoviesCard({ movie, saved, onLikeClick, onDeleteClick })
             <button
               type="button"
               className="movies-card__button movies-card__button_type_unsave"
-              onClick={handleDeleteClick}
+              onClick={handleDeleteCard}
               aria-label="Удалить фильм из сохранённых"
               title="Удалить фильм из сохранённых"
             ></button>

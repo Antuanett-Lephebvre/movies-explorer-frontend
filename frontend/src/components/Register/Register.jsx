@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
 
-export default function Register({ handleRegister }) {
+export default function Register({ handleRegistration }) {
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
 
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleRegister(values);
+    handleRegistration(values);
   }
 
   useEffect(() => {

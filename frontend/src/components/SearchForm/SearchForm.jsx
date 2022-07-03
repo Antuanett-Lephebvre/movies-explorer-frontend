@@ -8,7 +8,7 @@ import dividingLine from '../../images/dividingLine.svg';
 import loopImg from '../../images/loop.svg';
 
 export default function SearchForm({ handleSearchSubmit, handleShortFilms, shortMovies }) {
-  const currentUser = useContext(CurrentUserContext);
+  const nowUser = useContext(CurrentUserContext);
   const location = useLocation();
   const { values, handleChange, isValid, setIsValid } = useFormWithValidation();
 
@@ -24,12 +24,12 @@ export default function SearchForm({ handleSearchSubmit, handleShortFilms, short
   }, [isValid]);
 
   useEffect(() => {
-    if (location.pathname === '/movies' && localStorage.getItem(`${currentUser.email} - movieSearch`)) {
-      const searchValue = localStorage.getItem(`${currentUser.email} - movieSearch`);
+    if (location.pathname === '/movies' && localStorage.getItem(`${nowUser.email} - movieSearch`)) {
+      const searchValue = localStorage.getItem(`${nowUser.email} - movieSearch`);
       values.search = searchValue;
       setIsValid(true);
     }
-  }, [currentUser]);
+  }, [nowUser]);
 
   return (
     <section className="search">

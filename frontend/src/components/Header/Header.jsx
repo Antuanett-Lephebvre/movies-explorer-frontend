@@ -3,7 +3,7 @@ import './Header.css';
 import Navigation from '../Navigation/Navigation.jsx';
 import logo from '../../images/logo.svg';
 
-function Header({ loggedIn, onClickBurger, isBurgerOpened }) {
+function Header({ loggedIn, onClickBurger, isBurgerOpen }) {
   const location = useLocation();
 
   return (
@@ -19,7 +19,7 @@ function Header({ loggedIn, onClickBurger, isBurgerOpened }) {
         <Navigation
           loggedIn={loggedIn}
           onClickBurger={onClickBurger}
-          isBurgerOpened={isBurgerOpened}
+          isBurgerOpen={isBurgerOpen}
         />
       </div>
     </header>

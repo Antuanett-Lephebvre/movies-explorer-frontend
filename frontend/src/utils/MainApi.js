@@ -10,7 +10,7 @@ class Api {
     return res.ok ? result : Promise.reject(result.message);
   }
 
-  createUser(name, email, password) {
+  createProfile(name, email, password) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ class Api {
     }).then(res => this._requestResult(res));
   }
 
-  updateUser(name, email) {
+  updateProfile(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {

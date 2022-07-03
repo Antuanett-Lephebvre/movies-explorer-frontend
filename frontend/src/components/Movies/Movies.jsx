@@ -10,16 +10,16 @@ import SearchForm from '../SearchForm/SearchForm.jsx';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.jsx';
 import CurrentUserContext from '../../contexts/CurrentUserContext.jsx';
 
-export default function Movies({ setIsLoader, setIsInfoTooltip, savedMoviesList, onLikeClick, onDeleteClick }) {
-  const currentUser = useContext(CurrentUserContext);
+export default function Movies({ setIsLoader, setIsInfoTooltip, savedMoviesList, onLikeCard, onDeleteCard }) {
+  const nowUser = useContext(CurrentUserContext);
 
   const [shortMovies, setShortMovies] = useState(false);
   const [initialMovies, setInitialMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [selectionMovies, setSelectionMovies] = useState([]);
   const [NotFound, setNotFound] = useState(false);
   const [isAllMovies, setIsAllMovies] = useState([]);
 
-  function handleSetFilteredMovies(movies, userQuery, shortMoviesCheckbox) {
+  function handleSetSelectionMovies(movies, userQuery, shortMoviesCheckbox) {
     const moviesList = filterMovies(movies, userQuery, shortMoviesCheckbox);
     if (moviesList.length === 0) {
       setIsInfoTooltip({
@@ -32,18 +32,18 @@ export default function Movies({ setIsLoader, setIsInfoTooltip, savedMoviesList,
       setNotFound(false);
     }
     setInitialMovies(moviesList);
-    setFilteredMovies(
+    setSelectionMovies(
       shortMoviesCheckbox ? filterShortMovies(moviesList) : moviesList
     );
     localStorage.setItem(
-      `${currentUser.email} - movies`,
+      `${nowUser.email} - movies`,
       JSON.stringify(moviesList)
     );
   }
 
   function handleSearchSubmit(inputValue) {
-    localStorage.setItem(`${currentUser.email} - movieSearch`, inputValue);
-    localStorage.setItem(`${currentUser.email} - shortMovies`, shortMovies);
+    localStorage.setItem(`${nowUser.email} - movieSearch`, inputValue);
+    localStorage.setItem(`${nowUser.email} - shortMovies`, shortMovies);
 
     if (isAllMovies.length === 0) {
       setIsLoader(true);
@@ -51,7 +51,7 @@ export default function Movies({ setIsLoader, setIsInfoTooltip, savedMoviesList,
         .getMovies()
         .then(movies => {
           setIsAllMovies(movies);
-          handleSetFilteredMovies(
+          handleSetSelectionMovies(
             transformMovies(movies),
             inputValue,
             shortMovies
@@ -66,43 +66,43 @@ export default function Movies({ setIsLoader, setIsInfoTooltip, savedMoviesList,
         )
         .finally(() => setIsLoader(false));
     } else {
-      handleSetFilteredMovies(isAllMovies, inputValue, shortMovies);
+      handleSetSelectionMovies(isAllMovies, inputValue, shortMovies);
     }
   }
 
   function handleShortFilms() {
     setShortMovies(!shortMovies);
     if (!shortMovies) {
-      setFilteredMovies(filterShortMovies(initialMovies));
+      setSelectionMovies(filterShortMovies(initialMovies));
     } else {
-      setFilteredMovies(initialMovies);
+      setSelectionMovies(initialMovies);
     }
-    localStorage.setItem(`${currentUser.email} - shortMovies`, !shortMovies);
+    localStorage.setItem(`${nowUser.email} - shortMovies`, !shortMovies);
   }
 
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser.email} - shortMovies`) === 'true') {
+    if (localStorage.getItem(`${nowUser.email} - shortMovies`) === 'true') {
       setShortMovies(true);
     } else {
       setShortMovies(false);
     }
-  }, [currentUser]);
+  }, [nowUser]);
 
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser.email} - movies`)) {
+    if (localStorage.getItem(`${nowUser.email} - movies`)) {
       const movies = JSON.parse(
-        localStorage.getItem(`${currentUser.email} - movies`)
+        localStorage.getItem(`${nowUser.email} - movies`)
       );
       setInitialMovies(movies);
       if (
-        localStorage.getItem(`${currentUser.email} - shortMovies`) === 'true'
+        localStorage.getItem(`${nowUser.email} - shortMovies`) === 'true'
       ) {
-        setFilteredMovies(filterShortMovies(movies));
+        setSelectionMovies(filterShortMovies(movies));
       } else {
-        setFilteredMovies(movies);
+        setSelectionMovies(movies);
       }
     }
-  }, [currentUser]);
+  }, [nowUser]);
 
   return (
     <main className="movies">
@@ -113,10 +113,10 @@ export default function Movies({ setIsLoader, setIsInfoTooltip, savedMoviesList,
       />
       {!NotFound && (
         <MoviesCardList
-          moviesList={filteredMovies}
+          moviesList={selectionMovies}
           savedMoviesList={savedMoviesList}
-          onLikeClick={onLikeClick}
-          onDeleteClick={onDeleteClick}
+          onLikeCard={onLikeCard}
+          onDeleteCard={onDeleteCard}
         />
       )}
     </main>

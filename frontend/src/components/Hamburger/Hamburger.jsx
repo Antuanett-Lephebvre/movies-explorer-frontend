@@ -2,7 +2,7 @@ import './Hamburger.css';
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 
-export default function Hamburger({ isBurgerOpened, onClickBurger }) {
+export default function Hamburger({ isBurgerOpen, onClickBurger }) {
 
   const isMobile = useMediaQuery({ query: `(max-width: 800px)` });
 
@@ -11,16 +11,16 @@ export default function Hamburger({ isBurgerOpened, onClickBurger }) {
   };
 
   useEffect(() => {
-    if (!isMobile && isBurgerOpened) {
+    if (!isMobile && isBurgerOpen) {
       onClickBurger();
     }
-  }, [isBurgerOpened, isMobile, onClickBurger]);
+  }, [isBurgerOpen, isMobile, onClickBurger]);
 
   return (
     <button
       type="button"
       className={`hamburger-button hamburger-button_${
-        isBurgerOpened ? 'on' : 'off'
+        isBurgerOpen ? 'on' : 'off'
       }`}
       onClick={handleOnClickBurger}
     >
