@@ -46,7 +46,6 @@ export default function SearchForm({ handleSearchSubmit, handleShortFilms, short
           onChange={handleChange}
           required
         />
-        <span className="search__error">{errorQuery}</span>
         </div>
         <div className='search__input-bar'>
         <button className="search__button" type="submit"></button>
@@ -54,6 +53,7 @@ export default function SearchForm({ handleSearchSubmit, handleShortFilms, short
       <FilterCheckbox shortMovies={shortMovies} handleShortFilms={handleShortFilms} name='filter__checkbox-full'/>
       </div>
       </form>
+      <span className="search__error">{errorQuery}</span>
       <FilterCheckbox shortMovies={shortMovies} handleShortFilms={handleShortFilms} name='filter__checkbox-short'/>
     </section>
   )
